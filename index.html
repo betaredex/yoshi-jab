@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h3>yoshi jab calculator</h3>
+    <p>close jab is the one that actually combos. this calculator assumes no staling or rage</p>
+    target weight (check <a href="http://kuroganehammer.com/Ultimate/Weight">KH</a>, im too lazy)<br>
+    <input type="number" id="weight" value="100"><br>
+    target percent<br>
+    <input type="number" id="percent" value="0"><br>
+    <input type="button" value="calculate" onclick="calculate()">
+    <p id="result"></p>
+    <script>
+      function calculate() {
+        var w = document.getElementById("weight").value;
+        var p = document.getElementById("percent").value;
+        var kb = (((p+3.78)/10+(p+3.78)*3*(1-(1-1.05)*0.3)*1.4*(200/(w+100))+18)*30/100)+40;
+        var hitstun = Math.floor(kb*0.4)-1;
+        var adv = hitstun - 17;
+        if(adv >= 0) {
+          document.getElementById("result").innerHTML = "+"+adv;
+        }
+        else {
+          document.getElementById("result").innerHTML = adv;
+        }
+      }
+    </script>
+  </body>
+</html>
