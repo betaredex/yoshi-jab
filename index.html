@@ -1,8 +1,47 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	</head>
-	<body>
-		<p>rewriting this thing itll be back up soon</p>
-	</body>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h3>yoshi jab frame advantage calculator</h3>
+    <p>close jab is the one that actually combos. this calculator assumes no staling or rage</p>
+    <p>target weight (check <a href="http://kuroganehammer.com/Ultimate/Weight">KH</a>, im too lazy)</p>
+    <input type="number" id="weight" value="100"><br>
+    <p>target percent</p>
+    <input type="number" id="percent" value="0"><br>
+    <input type="button" value="calculate" onclick="calculate()">
+    <p>frame advantage:</p>
+    <p id="result"></p>
+    <h4>reverse calculator</h4>
+    <p>target weight</p>
+    <input type="number" id="weight2" value="100"><br>
+    <p>ideal frame advantage</p>
+    <input type="number" id="adv" value="5"><br>
+    <input type="button" value="calculate" onclick="calculate_reverse()">
+    <p>minimum percent:</p>
+    <p id="result2"></p>
+    <script>
+      function calculate() {
+        var w = document.getElementById("weight").value;
+        var p = document.getElementById("percent").value;
+        var kb = (((parseInt(p)+3.78)/10+((parseInt(p)+3.78)*3*(1-(1-1.05)*0.3)/20))*1.4*(200/(parseInt(w)+100))+18)*30/100+40;
+        console.log(kb) 
+        var hitstun = Math.floor(kb*0.4)-1;
+        var adv = hitstun - 14;
+        if(adv >= 0) {
+          document.getElementById("result").innerHTML = "+"+adv;
+        }
+        else {
+          document.getElementById("result").innerHTML = adv;
+        }
+      }
+      function calculate_reverse() {
+        var w = document.getElementById("weight2").value;
+        var adv = document.getElementById("adv").value;
+        var p = Math.ceil((((parseInt(adv)+15)/0.4-40)*100/30-18)/((1/10+3*(1-(1-1.05)*0.3)/20)*1.4*(200/(parseInt(w)+100)))-3.78);
+        document.getElementById("result2").innerHTML = p.toString()+"%";
+      }
+    </script>
+  </body>
 </html>
